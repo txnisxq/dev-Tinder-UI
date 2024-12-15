@@ -1,21 +1,29 @@
+import { useSelector } from "react-redux"
 
 
 export const NavBar = () => {
+  
+  //here iam using a hook "useSelector" , which is used to get data from store directly. TO yaha mai user ko store se nikal raha hu .
+  const user  = useSelector((store=>store.user));
+
+  console.log(user);
+  
   return (
     <div className="navbar bg-base-200">
   <div className="flex-1">
     <a className="btn btn-ghost text-xl"><h2>&#128511;</h2>Dev-Tinder</a>
   </div>
-  <div className="flex-none gap-2">
-    <div className="form-control">
+  {user && (<div className="flex-none gap-2">
+    <div className="form-control"> Welcome {user.firstName}</div>
+
+
+    <div className="dropdown dropdown-end mx-5 flex ">
       
-    </div>
-    <div className="dropdown dropdown-end mx-5">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
           <img
             alt="Tailwind CSS Navbar component"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+            src={user.photoUrl} />
         </div>
       </div>
       <ul
@@ -31,7 +39,9 @@ export const NavBar = () => {
         <li><a>Logout</a></li>
       </ul>
     </div>
-  </div>
+
+
+  </div>)}
        </div>
   )
 }

@@ -1,25 +1,31 @@
 import { BrowserRouter ,Routes ,Route } from "react-router-dom";
 
-import { Body } from "./Body";
-import { Login } from "./login";
-import { Profile } from "./Profile";
+import { Body } from "./components/Body";
+import { Login } from "./components/Login";
+import { Profile } from "./components/Profile";
+import { Feed } from "./components/Feed";
+import { Provider } from "react-redux";
+import reduxStore from "./utils/reduxStore";
 
 function App() {
   
 
   return (
     <>
-       
-       <BrowserRouter basename="/">
-         <Routes>
+      <Provider store={reduxStore}>      {/* provider se wrap kiya hai taki mere redux store ka excess pure app ko mil aje */}
+        <BrowserRouter basename="/">
+          <Routes>
             
             <Route path="/"  element={<Body/>} >
+                <Route path="/" element={<Feed/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/profile" element={<Profile/>}/>
             </Route>
             
-         </Routes>
-       </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </Provider> 
+       
     
     
     </>
