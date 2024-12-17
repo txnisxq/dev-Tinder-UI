@@ -24,7 +24,7 @@ export const Login = () => {
         //here is am dispatching an action for add user
         dispatch(addUser(res.data));
 
-        //here i am calling navigate hook . Remember, always return navigate hook.
+        //here i am calling navigate hook . Remember, always "return" navigate hook.
         return navigate("/");
 
     }
