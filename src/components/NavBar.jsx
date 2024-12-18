@@ -1,5 +1,8 @@
-import { useSelector } from "react-redux"
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
+import { removeUser } from "../utils/userSlice";
 
 
 export const NavBar = () => {
@@ -7,7 +10,22 @@ export const NavBar = () => {
   //here iam using a hook "useSelector" , which is used to get data from store directly. TO yaha mai user ko store se nikal raha hu .
   const user  = useSelector((store=>store.user));
 
-  console.log(user);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const logOutHandler = async() =>{
+      try{
+        const res = await axios.post(BASE_URL + "/logout" , {} ,{withCredentials:true});
+        dispatch(removeUser());
+        navigate("/login");
+      }
+      catch(err){
+        console.error(err);
+      }
+  }
+
+
   
   return (
     <div className="navbar bg-base-200">
@@ -37,7 +55,7 @@ export const NavBar = () => {
           </Link>
         </li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li><a onClick={logOutHandler}>Logout</a></li>
       </ul>
     </div>
 

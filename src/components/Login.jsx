@@ -10,6 +10,8 @@ export const Login = () => {
   const[emailId , setEmailId] = useState("tanishq@gmail.com");
   const[password , setPassword] = useState("Tanishq@123");
   const dispatch = useDispatch();
+
+  const [errorMessage , setErrorMessage] = useState("");
   
 
   //here i am using useNavigate hook , to navigate my page to feed page after user login.
@@ -29,7 +31,7 @@ export const Login = () => {
 
     }
     catch(err){
-        console.error(err);
+        setErrorMessage(err.response.data);
     }
  }
 
@@ -82,7 +84,7 @@ export const Login = () => {
                
 
 
-         
+               <p className='text-red-700'>{errorMessage}</p>
                <div className="card-actions flex justify-center pt-4">
                   <button className="btn"  onClick={handleLogin} >Login</button>
                </div>
