@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
 import feedReducer from "./feedSlice";
 import connectionReducer from "./connectionSlice";
+import requestReducer from "./requestSlice"
 
 
 //creating a redux store , by calling a method
@@ -11,7 +12,8 @@ const reduxStore = configureStore({
    reducer:{
     user: userReducer,
     feed: feedReducer,
-    connection: connectionReducer
+    connection: connectionReducer,
+    requests: requestReducer
    },
 });
 
