@@ -1,6 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
 import feedReducer from "./feedSlice";
+import connectionReducer from "./connectionSlice";
+
 
 //creating a redux store , by calling a method
 //phele maine ek redux store create kiya , phir maine usko configure kar diya ek reducer se.
@@ -9,6 +11,7 @@ const reduxStore = configureStore({
    reducer:{
     user: userReducer,
     feed: feedReducer,
+    connection: connectionReducer
    },
 });
 

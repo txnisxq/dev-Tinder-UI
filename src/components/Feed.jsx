@@ -33,7 +33,7 @@ export const Feed = () => {
     feed && 
     
     <div className="flex border-white justify-center my-14">
-    <UserCard prop={feed[0]}/>
+    <UserCard user={feed[0]}/>
     </div>
 
     
