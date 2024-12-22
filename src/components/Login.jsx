@@ -7,8 +7,12 @@ import { BASE_URL } from '../utils/constants';
 
 export const Login = () => {
   
-  const[emailId , setEmailId] = useState("tanishq@gmail.com");
+  const[emailId , setEmailId] = useState("Tanishq@gmail.com");
   const[password , setPassword] = useState("Tanishq@123");
+  const [firstName, setFirstName] = useState("");
+  const [lastName , setLastName] = useState("");
+  const [isLoginForm, setIsLoginForm]  = useState(true);
+
   const dispatch = useDispatch();
 
   const [errorMessage , setErrorMessage] = useState("");
@@ -16,6 +20,8 @@ export const Login = () => {
 
   //here i am using useNavigate hook , to navigate my page to feed page after user login.
   const navigate = useNavigate();
+
+
 
  const handleLogin = async()=>{
     try{
@@ -35,6 +41,19 @@ export const Login = () => {
     }
  }
 
+
+ const handleSignUp = async()=>{
+   try{
+      const res = await axios.post(BASE_URL + "/signup" , {firstName, lastName, emailId, password}, {withCredentials:true});
+      dispatch(addUser(res?.data?.data));
+      return navigate("/profile");
+   }
+   catch(err){
+      setErrorMessage(err.response.data);
+   }
+ }
+
+
   
     return (
     
@@ -43,11 +62,52 @@ export const Login = () => {
             <div className="card-body">
                 
                
-                  <h2 className="card-title  justify-center text-xl">Login</h2>
+                  <h2 className="card-title  justify-center text-xl">{isLoginForm ? "Login" : "Sign Up"}</h2>
                
                
                
                <div>
+                 
+               {!isLoginForm &&
+
+               <>
+                  
+                  <label className="form-control w-full max-w-xs my-2">
+                  
+                  <div className="label">
+                     <span className="label-text text-black text-base">First Name</span>
+                  </div>
+
+                     <input 
+                     type="text" 
+                     placeholder="Enter your First Name*" 
+                     className="input input-bordered w-full max-w-xs text-white" 
+                     value={firstName}
+                     onChange={(e)=>setFirstName(e.target.value)}
+                     />
+
+                 </label>
+
+                 <label className="form-control w-full max-w-xs my-2">
+                  
+                  <div className="label">
+                     <span className="label-text text-black text-base">Last Name</span>
+                  </div>
+
+                     <input 
+                     type="text" 
+                     placeholder="Enter your Last Name*" 
+                     className="input input-bordered w-full max-w-xs text-white" 
+                     value={lastName}
+                     onChange={(e)=>setLastName(e.target.value)}
+                     />
+
+                 </label>
+
+                 </>
+                 
+               }
+                 
                  <label className="form-control w-full max-w-xs my-2">
                   
                   <div className="label">
@@ -86,8 +146,10 @@ export const Login = () => {
 
                <p className='text-red-700'>{errorMessage}</p>
                <div className="card-actions flex justify-center pt-4">
-                  <button className="btn"  onClick={handleLogin} >Login</button>
+                  <button className="btn"  onClick={isLoginForm ? handleLogin : handleSignUp} >{isLoginForm ? "Login" : "Sign Up"}</button>
                </div>
+
+               <p className='cursor-pointer m-auto text-indigo-950' onClick={()=>setIsLoginForm((value)=>!value)}>{isLoginForm ? "New user? Sign Up" : "Account already exist? Login"}</p>
 
             </div>
        </div>

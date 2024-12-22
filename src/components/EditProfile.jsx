@@ -9,27 +9,27 @@ import { addUser } from '../utils/userSlice';
 
 export const EditProfile = ({user}) => {
 
-  
+  const dispatch = useDispatch();
   
   const [firstName , setFirstName] = useState(user.firstName);
   const [lastName , setLastName] = useState(user.lastName);
-  const [photoUrl , setPhotoUrl] = useState(user.photoUrl);
-  const [about , setAbout] = useState(user.about);
-  const [gender , setGender] = useState(user.gender);
-  const [ skills, setSkills] = useState(user.skills);
-  const [ age, setAge] = useState(user.age);
+  const [photoUrl , setPhotoUrl] = useState(user.photoUrl || "");
+  const [about , setAbout] = useState(user.about || "");
+  const [gender , setGender] = useState(user.gender || "");
+  const [ skills, setSkills] = useState(user.skills || "");
+  const [ age, setAge] = useState(user.age || "");
   const [errorMessage , setErrorMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
 
-  const dispatch = useDispatch();
+ 
 
   const saveProfile = async()=>{
     
     try{
         const res = await axios.patch(BASE_URL + "/profile/edit" , {firstName , lastName , age , gender , about , skills , photoUrl}, {withCredentials:true});
-        console.log(res);
-
-        dispatch(addUser(res.data.data));
+        
+        dispatch(addUser(res?.data?.data));
+        
 
         setShowToast(true);
         
