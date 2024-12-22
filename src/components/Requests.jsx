@@ -14,7 +14,7 @@ export const Requests = () => {
   const fetchRequests = async()=>{
     try{
         const res = await axios.get(BASE_URL + "/user/requests" , {withCredentials: true});
-        console.log(res.data.data);
+        // console.log(res.data.data);
         dispatch(addRequest(res?.data?.data));
 
 

@@ -9,6 +9,7 @@ export const Feed = () => {
   
   const dispatch = useDispatch();
   const feed = useSelector((store)=>store.feed);
+  
 
   const getFeed = async() =>{
     try{
@@ -21,18 +22,26 @@ export const Feed = () => {
 
     }
     catch(err){
-
+     console.log(err);
     }
   }
 
   useEffect(()=>{
     getFeed();
   },[]);
+
+  if(!feed){
+    return;
+  }
+
+  if(feed.length == 0){
+    return <p className="text-center my-10 text-blue-50 text-2xl">No new users found!!!</p>
+  }
   
   return (
     feed && 
     
-    <div className="flex border-white justify-center my-14">
+    <div className="flex border-white justify-center my-6">
     <UserCard user={feed[0]}/>
     </div>
 
