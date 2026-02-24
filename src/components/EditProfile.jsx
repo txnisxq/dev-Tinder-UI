@@ -16,7 +16,7 @@ export const EditProfile = ({user}) => {
   const [photoUrl , setPhotoUrl] = useState(user.photoUrl || "");
   const [about , setAbout] = useState(user.about || "");
   const [gender , setGender] = useState(user.gender || "");
-  const [ skills, setSkills] = useState(user.skills || "");
+  const [skills, setSkills] = useState(user.skills || []);
   const [ age, setAge] = useState(user.age || "");
   const [errorMessage , setErrorMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
@@ -140,12 +140,20 @@ export const EditProfile = ({user}) => {
                      <span className="label-text text-black text-base ">Skills</span>
                   </div>
 
-                     <input 
-                     type="text" 
-                     placeholder="Edit your Skills*" 
-                     className="input input-bordered w-full max-w-xs text-white"
-                     value={skills}
-                     onChange={(e)=>setSkills(e.target.value)} />
+                     <input
+                        type="text"
+                        placeholder="Edit your Skills"
+                        className="input input-bordered w-full max-w-xs text-white"
+                        value={skills.join(", ")}   // convert array → string
+                        onChange={(e) =>
+                         setSkills(
+                          e.target.value
+                          .split(",")              // split string → array
+                          .map((s) => s.trim())     // remove spaces
+                          .filter((s) => s)         // remove empty values
+                  )
+   }
+/>
 
                  </label>
 
