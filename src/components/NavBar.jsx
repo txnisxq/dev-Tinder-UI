@@ -62,6 +62,11 @@ export const NavBar = () => {
         <li>
           <Link to="/requests">Requests</Link>
         </li>
+       
+
+        <li>
+          <Link to="/delux">Delux</Link>
+        </li>
 
         <li><a onClick={logOutHandler}>Logout</a></li>
       </ul>

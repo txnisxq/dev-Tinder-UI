@@ -7,6 +7,7 @@ import { Feed } from "./components/Feed";
 import { Provider } from "react-redux";
 import { Connections } from "./components/Connections";
 import { Requests } from "./components/Requests";
+import Delux  from "./components/Delux";
 import reduxStore from "./utils/reduxStore";
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/connections" element={<Connections/>}/>
                 <Route path="/requests" element={<Requests/>}/>
+             <Route path="/delux" element={<Delux/>}/>
+
             </Route>
             
           </Routes>
